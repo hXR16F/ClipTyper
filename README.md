@@ -68,8 +68,16 @@ If you want to stop the program even when it's writing, just close it.
 
 ## ⚙️ Configuration & Limitations
 
-*   **Text Length Limit:** Currently limited to **100,000 characters**. Attempting to paste more will trigger an error dialog.
-*   **Display Server:** On Linux/Mac, ensure you have the correct display server running as `wxPython` requires one.
+### Configuration
+* **INI File:** "ClipTyper.ini" is automatically created in the same directory as the script if it does not exist. You can edit it to change the settings.
+* **Delay:** Sets the delay between each typed character in seconds.
+* **Typing Backend:** Choose which engine to use:
+  * `1` = `keyboard` library
+  * `2` = `PyAutoGUI` library
+
+### Limitations
+* **Text Length Limit:** Currently limited to **100,000 characters**. Attempting to paste more will trigger an error dialog.
+* **Display Server:** On Linux/Mac, ensure you have the correct display server running as `wxPython` requires one.
 
 ## 🛠️ Troubleshooting
 
@@ -77,4 +85,5 @@ If you want to stop the program even when it's writing, just close it.
 | :--- | :--- |
 | **"Error accessing clipboard"** | Ensure no other application is locking the clipboard. |
 | **Window doesn't appear** | On Linux, ensure `DISPLAY` environment variable is set correctly (e.g., `export DISPLAY=:0`). |
-| **Antivirus blocks execution** | Some AVs flag `pyautogui` and `nuitka`. Add an exception or whitelist the program folder. |
+| **Antivirus blocks execution** | Some AVs flag `keyboard`, `pyautogui` and `nuitka` libraries. Add an exception or whitelist the program folder. |
+| **XYZ engine selected but 'XYZ' library not installed.** | Install this library using `pip` or select another engine. |
