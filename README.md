@@ -1,10 +1,11 @@
 <p align="center">
-	<b>ClipTyper</b> — Paste anywhere, even when clipboard sharing is disabled.
-	<br>
- 	<i>A lightweight Python utility that simulates keyboard strokes to paste clipboard content into applications where standard copy-paste functionality is restricted.</i>
-	<br><br><br>
 	<img src="https://github.com/user-attachments/assets/5775a23c-9bf5-4e93-9c29-f5330bc81633" width="384" height="384">
 </p>
+
+# 🔥 Overview
+**ClipTyper** — Paste anywhere, even when clipboard sharing is disabled.\
+A lightweight utility that simulates keyboard strokes to paste clipboard content into applications where standard copy-paste functionality is restricted.
+
 
 ## 📖 Description
 
