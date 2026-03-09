@@ -75,6 +75,17 @@ If you want to stop the program even when it's writing, just close it.
   * `1` = `keyboard` library
   * `2` = `PyAutoGUI` library
 
+#### Example `ClipTyper.ini`
+```ini
+[settings]
+# Delay between each character in seconds
+delay = 0.01
+# Typing backend, 1 = keyboard, 2 = pyautogui
+engine = 1
+```
+
+If the INI file is missing, **ClipTyper** will automatically generate it with default values.
+
 ### Limitations
 * **Text Length Limit:** Currently limited to **100,000 characters**. Attempting to paste more will trigger an error dialog.
 * **Display Server:** On Linux/Mac, ensure you have the correct display server running as `wxPython` requires one.
@@ -87,3 +98,4 @@ If you want to stop the program even when it's writing, just close it.
 | **Window doesn't appear** | On Linux, ensure `DISPLAY` environment variable is set correctly (e.g., `export DISPLAY=:0`). |
 | **Antivirus blocks execution** | Some AVs flag `keyboard`, `pyautogui` and `nuitka` libraries. Add an exception or whitelist the program folder. |
 | **XYZ engine selected but 'XYZ' library not installed.** | Install this library using `pip` or select another engine. |
+| **Text is scrambled or typed incorrectly** | Increase the `delay` in `ClipTyper.ini` or try a different typing engine. |
