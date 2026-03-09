@@ -40,7 +40,7 @@ ClipTyper is particularly useful in environments where clipboard synchronization
 
 ### Prerequisites
 * Python 3.9 or higher is recommended.
-* On Linux: `xclip` (X11) or `wl-clipboard` (Wayland) package is required.
+* On Linux: `xclip` package is required.
 
 ### Dependencies
 You can install the required libraries using:
