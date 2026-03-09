@@ -1,10 +1,49 @@
 import wx
 import pyperclip
-import pyautogui as pg
 import threading
 
+from os import path, name
+from configparser import ConfigParser
+
+keyboard_available = False
+pyautogui_available = False
+
+try:
+    import keyboard
+    keyboard_available = True
+except ModuleNotFoundError:
+    pass
+
+try:
+    import pyautogui as pg
+    pyautogui_available = True
+except ModuleNotFoundError:
+    pass
+
+if not keyboard_available and not pyautogui_available:
+    raise ImportError("Install either 'keyboard' or 'pyautogui' library.")
+
+DEFAULT_ENGINE = 1 if name == "nt" else 2
 
 class ClipTyper:
+    @staticmethod
+    def read_config():
+        config = ConfigParser()
+
+        if path.isfile("ClipTyper.ini"):
+            config.read("ClipTyper.ini")
+            delay = float(config["settings"].get("delay", 0.01))
+            engine = int(config["settings"].get("engine", DEFAULT_ENGINE))
+        else:
+            config["settings"] = {"delay": "0.01", "engine": f"{DEFAULT_ENGINE}"}
+            with open("ClipTyper.ini", "w") as configfile:
+                config.write(configfile)
+
+            delay = 0.01
+            engine = DEFAULT_ENGINE
+
+        return {"delay": delay, "engine": engine}
+
     @staticmethod
     def get_clipboard_text():
         try:
@@ -15,7 +54,23 @@ class ClipTyper:
 
     @staticmethod
     def send_text(text):
-        pg.write(text, interval=0.001)
+        cfg = ClipTyper.read_config()
+        delay = cfg["delay"]
+        engine = cfg["engine"]
+
+        if engine == 1:
+            if not keyboard_available:
+                raise ImportError("Keyboard engine selected but 'keyboard' library not installed.")
+            text = text.replace("\r\n", "\n")
+            keyboard.write(text, delay=delay)
+
+        elif engine == 2:
+            if not pyautogui_available:
+                raise ImportError("PyAutoGUI engine selected but 'pyautogui' library not installed.")
+            pg.write(text, interval=delay)
+
+        else:
+            raise ValueError("Invalid engine value in config. Use 1 or 2.")
 
 
 class ClipTyperWindow(wx.Frame):
@@ -80,11 +135,7 @@ class ClipTyperWindow(wx.Frame):
         self.paste_button.Enable()
 
 
-def main():
+if __name__ == "__main__":
     app = wx.App(False)
     frame = ClipTyperWindow()
     app.MainLoop()
-
-
-if __name__ == "__main__":
-    main()
