@@ -3,6 +3,7 @@
 	<br>
  	<i>A lightweight Python utility that simulates keyboard strokes to paste clipboard content into applications where standard copy-paste functionality is restricted.</i>
 	<br><br><br>
+	<img src="https://raw.githubusercontent.com/hXR16F/ClipTyper/refs/heads/main/preview.png">
 </p>
 
 ## 📖 Description
